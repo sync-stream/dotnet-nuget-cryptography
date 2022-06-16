@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using System.Xml.Serialization;
+using SyncStream.Cryptography.Converter;
 using SyncStream.Serializer;
 
 // Define our namespace
@@ -8,6 +9,7 @@ namespace SyncStream.Cryptography.Model;
 /// <summary>
 /// This class maintains the structure of an encrypted value with an index
 /// </summary>
+[JsonConverter(typeof(EncryptedValueWithIndexJsonConverter))]
 [XmlInclude(typeof(EncryptedValue))]
 [XmlRoot("encryptedValue")]
 public class EncryptedValueWithIndex : EncryptedValue
@@ -205,6 +207,7 @@ public class EncryptedValueWithIndex : EncryptedValue
 /// This class maintains the structure of an encrypted value of type <typeparamref name="TSource" /> with an index
 /// </summary>
 /// <typeparam name="TSource">The expected type of the value</typeparam>
+[JsonConverter(typeof(EncryptedGenericValueWithIndexJsonConverterFactory))]
 [XmlInclude(typeof(EncryptedValue))]
 [XmlInclude(typeof(EncryptedValue<>))]
 [XmlRoot("encryptedValue")]
